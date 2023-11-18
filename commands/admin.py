@@ -142,7 +142,7 @@ class Admin(commands.Cog):
             await ctx.send("Wrong time unit, boss. Try using 'sec', 'mins', 'hrs', or 'days'.")
             return
 
-        guild = bot.get_guild(GUILD_ID)
+        guild = self.bot.get_guild(GUILD_ID)
         muted_role = guild.get_role(MUTED_ROLE_ID)
 
         if muted_role is None:
@@ -164,7 +164,7 @@ class Admin(commands.Cog):
         conn.commit()
 
         await asyncio.sleep(mute_seconds)
-        guild = bot.get_guild(GUILD_ID)
+        guild = self.bot.get_guild(GUILD_ID)
         cursor.execute('SELECT time, FROM add_restrict WHERE guild = ? AND member_id = ?',
                       (guild.id, member.id))
         add_restrict_time = cursor.fetchone()
@@ -210,7 +210,7 @@ class Admin(commands.Cog):
             await ctx.send("Wrong time unit, boss. Try using 'sec', 'mins', 'hrs', or 'days'.")
             return
 
-        guild = bot.get_guild(GUILD_ID)
+        guild = self.bot.get_guild(GUILD_ID)
         muted_role = guild.get_role(MUTED_ROLE_ID)
 
         if len(member.roles) > 1:
